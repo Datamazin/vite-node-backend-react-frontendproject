@@ -1,4 +1,6 @@
 import React from 'react';
+import './PlayerCard.css';
+
 
 const PlayerCard = ({ data }) => {
   if (!data) return <p>Loading...</p>;

@@ -10,7 +10,7 @@ function App() {
   const [fruits, setFruits] = useState([]);
   const [vegetables, setVegetables] = useState([]); // State for vegetables API data
   const [playerData, setPlayerData] = useState(null);
-  const playerId = 667472; // Example: Dane Myers
+  const playerId = 665742; // Example: Juan Soto's player ID
 
   const fetchAPIs = async () => {
     try {
@@ -18,7 +18,7 @@ function App() {
   axios.get('http://localhost:8080/api'),
   axios.get('http://localhost:8080/api/fruits'),
   axios.get('http://localhost:8080/api/vegetables'),
-  axios.get('http://localhost:8080/api/player/667472')
+  axios.get(`http://localhost:8080/api/player/${playerId}`)
 ]);
 console.log('fruitsRes.data:', fruitsRes.data); // <-- Add this line
 setFruits(fruitsRes.data && fruitsRes.data.fruits ? fruitsRes.data.fruits : []);
