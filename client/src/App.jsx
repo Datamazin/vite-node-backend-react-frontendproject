@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import axios from 'axios';
-import { use } from 'react';
+// import axios from 'axios'; // Removed to use native fetch
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,13 +17,14 @@ function App() {
         : '/api/fruits';
       
       console.log('Fetching from:', apiUrl);
-      const response = await axios.get(apiUrl);
-      console.log('Response received:', response.data);
-      setArray(response.data.fruits);
-      console.log('Fruits set:', response.data.fruits);
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      console.log('Response received:', data);
+      setArray(data.fruits);
+      console.log('Fruits set:', data.fruits);
     } catch (error) {
       console.error('Error fetching fruits:', error);
-      console.error('Error details:', error.response || error.message);
+      console.error('Error details:', error.message);
     }
   };
 
