@@ -10,9 +10,22 @@ function App() {
   const [array, setArray] = useState([]);
 
   const fetchAPI = async () => {
-    const response = await axios.get('http://localhost:8080/api');
-    setArray(response.data.fruits);
-    console.log(response.data.fruits);
+    try {
+      // For local development, use Express server on port 8080
+      // For production (Azure Static Web Apps), use Azure Functions at /api/fruits
+      const apiUrl = import.meta.env.DEV 
+        ? 'http://localhost:8080/api'
+        : '/api/fruits';
+      
+      console.log('Fetching from:', apiUrl);
+      const response = await axios.get(apiUrl);
+      console.log('Response received:', response.data);
+      setArray(response.data.fruits);
+      console.log('Fruits set:', response.data.fruits);
+    } catch (error) {
+      console.error('Error fetching fruits:', error);
+      console.error('Error details:', error.response || error.message);
+    }
   };
 
   useEffect(() => {
